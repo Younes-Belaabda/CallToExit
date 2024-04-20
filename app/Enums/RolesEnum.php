@@ -4,14 +4,20 @@
 
     use Spatie\Enum\Enum;
 
-    final class RolesEnum extends Enum {
-        protected static function values() : array{
-            return [
-                'ADMIN'   => 'أدمين',
-                'STAFF'   => 'مشرف',
-                'FATHER'  => 'ولي الأمر',
-                'STUDENT' => 'طالب',
-            ];
+    enum RolesEnum: string {
+        case ADMIN = 'admin';
+        case STAFF = 'staff';
+        case STUDENT = 'student';
+        case FATHER = 'father';
+
+        public function label(): string
+        {
+            return match ($this) {
+                static::ADMIN => 'AD',
+                static::STAFF => 'ST',
+                static::STUDENT => 'S',
+                static::FATHER => 'F',
+            };
         }
     }
 

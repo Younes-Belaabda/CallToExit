@@ -4,13 +4,17 @@
 
     use Spatie\Enum\Enum;
 
-    final class ExitRequestStatusEnum extends Enum {
-        protected static function values() : array{
-            return [
-                'PROGRESS'   => 'قيد المراجعة',
-                'APPROVED'   => 'منتهية',
-                'REJECTED'  => 'مرفوضة'
-            ];
+    enum ExitRequestStatusEnum: string {
+        case PROGRESS = 'progress';
+        case APPROVED = 'approved';
+        case REJECTED = 'rejected';
+
+        public function label(): string
+        {
+            return match ($this) {
+                static::PROGRESS => 'PRG',
+                static::APPROVED => 'APPR',
+                static::REJECTED => 'REJ',
+            };
         }
     }
-
