@@ -1,7 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\FatherController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +33,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::resource('students', StudentController::class);
+    Route::resource('admins', AdminController::class);
+    Route::resource('staffs', StaffController::class);
+    Route::resource('fathers', FatherController::class);
+});
