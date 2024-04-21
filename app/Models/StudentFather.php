@@ -11,6 +11,8 @@ class StudentFather extends Model
 
     protected $table = 'student_father';
 
+    protected $fillable = ['father_id' , 'student_id'];
+
     public function student(){
         return $this->belongsTo(User::class , 'student_id');
     }

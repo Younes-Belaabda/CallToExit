@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\StudentFather;
 
 class FatherController extends Controller
 {
@@ -101,19 +102,18 @@ class FatherController extends Controller
         $eIDs_status = [];
 
         // check if some eIDs not exists
-        if(User::whereIn('eID' , $eIDs)->count() != count($eIDs)){
-            foreach($eIDs as $eID){
-                $status = false;
-                if(User::role('student')->where('eID' , $eID)->count()){
-                    $status = true;
-                }
-                $eIDs_status[] = [
-                    'eID' => $eID,
-                    'status' => $status
-                ];
+        foreach($eIDs as $eID){
+            if(User::role('student')->where('eID' , $eID)->count() && StudentFather::where([
+                'student_id' => User::role('student')->where('eID' , $eID)->first()->id ,
+                'father_id' => $father->id
+            ])->count() == 0){
+                StudentFather::create([
+                    'student_id' => User::role('student')->where('eID' , $eID)->first()->id ,
+                    'father_id' => $father->id
+                ]);
             }
         }
 
-        return json_encode(['status' => $eIDs_status]);
+        return redirect()->route('admin.fathers.students' , ['father' => $father]);
     }
 }

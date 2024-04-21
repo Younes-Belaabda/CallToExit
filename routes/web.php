@@ -37,6 +37,8 @@ require __DIR__.'/auth.php';
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::resource('students', StudentController::class);
     Route::get('students/{student}/fathers' , [StudentController::class , 'fathers'])->name('students.fathers');
+    Route::get('students/{student}/create/fathers' , [StudentController::class , 'create_fathers'])->name('students.create.fathers');
+    Route::post('students/{student}/store/fathers' , [StudentController::class , 'store_fathers'])->name('students.store.fathers');
 
     Route::resource('admins', AdminController::class);
 

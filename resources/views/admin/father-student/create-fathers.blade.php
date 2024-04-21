@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="badge bg-danger">علاقة مع الطلاب</div>
-    <div class="badge bg-danger">{{ $father->name }}</div>
+    <div class="badge bg-danger">علاقة مع أولياء الأمور</div>
+    <div class="badge bg-danger">{{ $student->name }}</div>
     <div class="col-12">
-        <a href="{{ route('admin.fathers.index') }}" class="btn btn-success btn-sm mb-2">الرجوع</a>
+        <a href="{{ route('admin.students.index') }}" class="btn btn-success btn-sm mb-2">الرجوع</a>
         <div class="card">
             <div class="card-body">
-                <form id="form-create" action="{{ route('admin.fathers.store.students', ['father' => $father]) }}"
+                <form id="form-create" action="{{ route('admin.students.store.fathers', ['student' => $student]) }}"
                     method="POST">
                     @csrf
                     <div class="form-group mb-3">

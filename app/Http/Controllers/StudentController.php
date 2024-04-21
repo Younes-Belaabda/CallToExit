@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\StudentFather;
 
 class StudentController extends Controller
 {
@@ -88,6 +89,34 @@ class StudentController extends Controller
 
     public function fathers(User $student){
         return view('admin.students.fathers' , ['student' => $student]);
+    }
+
+    public function create_fathers(User $student){
+        return view('admin.father-student.create-fathers' , ['student' => $student]);
+    }
+
+    public function store_fathers(Request $request , User $student){
+        $request->validate([
+            'eIDs' => 'required'
+        ]);
+
+        $eIDs = $request->input('eIDs');
+        $eIDs_status = [];
+
+        // check if some eIDs not exists
+        foreach($eIDs as $eID){
+            if(User::role('father')->where('eID' , $eID)->count() && StudentFather::where([
+                'father_id' => User::role('father')->where('eID' , $eID)->first()->id ,
+                'student_id' => $student->id
+            ])->count() == 0){
+                StudentFather::create([
+                    'father_id' => User::role('father')->where('eID' , $eID)->first()->id ,
+                    'student_id' => $student->id
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.students.fathers' , ['student' => $student]);
     }
 }
 
