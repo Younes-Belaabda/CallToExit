@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-12">
-        <a href="{{ route('admin.fathers.create') }}" class="btn btn-success btn-sm mb-2">إنشاء</a>
+        <a href="" class="btn btn-success btn-sm mb-2">إنشاء علاقة مع ولي أمر</a>
         <div class="card">
             <div class="card-body">
                 <div class="responsive-table-plugin">
@@ -13,20 +13,16 @@
                                     <tr>
                                         <th data-priority="1">رقم الهوية</th>
                                         <th data-priority="3">الإسم الثلاثي</th>
-                                        <th data-priority="3">الطلاب</th>
                                         <th data-priority="6">العمليات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($fathers as $father)
+                                    @foreach ($student->fathers as $connection)
                                     <tr>
-                                        <td>{{ $father->eID }}</td>
-                                        <td>{{ $father->name }}</td>
+                                        <td>{{ $connection->father->eID }}</td>
+                                        <td>{{ $connection->father->name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.fathers.students' , ['father' => $father]) }}" class="btn btn-info">الطلاب</a>
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.fathers.show' , ['father' => $father]) }}" class="btn btn-warning btn-sm">عرض</a>
+                                            <a href="{{ route('admin.fathers.show' , ['father' => $connection->father]) }}" class="btn btn-warning btn-sm">عرض</a>
                                         </td>
                                     </tr>
                                     @endforeach

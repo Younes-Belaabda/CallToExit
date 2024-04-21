@@ -13,10 +13,6 @@
                     <label class="form-label" for="name">الإسم الثلاثي</label>
                     <input class="form-control" type="text" value="{{ $father->name }}" readonly>
                 </div>
-                <div class="form-group mb-3">
-                    <label class="form-label" for="grade_id">الصف</label>
-                    <input class="form-control" type="text" value="{{ $father->grade->name }}" readonly>
-                </div>
                 <div class="d-flex gap-2">
                     <a href="{{ route('admin.fathers.edit', ['father' => $father]) }}"
                         class="btn btn-success btn-sm">تعديل</a>

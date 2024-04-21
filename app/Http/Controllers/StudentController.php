@@ -85,4 +85,9 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->route('admin.students.index');
     }
+
+    public function fathers(User $student){
+        return view('admin.students.fathers' , ['student' => $student]);
+    }
 }
+

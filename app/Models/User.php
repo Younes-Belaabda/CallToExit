@@ -47,6 +47,14 @@ class User extends Authenticatable
     ];
 
     public function grade(){
-        return $this->belongsTo(Grade::class);
+        return $this->belongsTo(Grade::class)->withDefault();
+    }
+
+    public function students(){
+        return $this->hasMany(StudentFather::class , 'father_id');
+    }
+
+    public function fathers(){
+        return $this->hasMany(StudentFather::class , 'student_id');
     }
 }

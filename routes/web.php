@@ -36,7 +36,12 @@ require __DIR__.'/auth.php';
 
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::resource('students', StudentController::class);
+    Route::get('students/{student}/fathers' , [StudentController::class , 'fathers'])->name('students.fathers');
+
     Route::resource('admins', AdminController::class);
+
     Route::resource('staffs', StaffController::class);
+
     Route::resource('fathers', FatherController::class);
+    Route::get('fathers/{father}/students' , [FatherController::class , 'students'])->name('fathers.students');
 });

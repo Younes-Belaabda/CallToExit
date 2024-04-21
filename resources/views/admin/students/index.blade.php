@@ -25,7 +25,7 @@
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->grade->name }}</td>
                                         <td>
-                                            <a href="" class="btn btn-info">أولياء الأمور</a>
+                                            <a href="{{ route('admin.students.fathers' , ['student' => $student]) }}" class="btn btn-info">أولياء الأمور</a>
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.students.show' , ['student' => $student]) }}" class="btn btn-warning btn-sm">عرض</a>

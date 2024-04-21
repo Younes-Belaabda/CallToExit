@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('exit_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('requested_by')->on('users');
-            $table->foreignId('verified_by')->on('users');
+            $table->unsignedBigInteger('requested_by');
+            $table->foreign('requested_by')->references('id')->on('users');
+            $table->unsignedBigInteger('verified_by');
+            $table->foreign('verified_by')->references('id')->on('users');
             $table->text('reason');
             $table->string('status');
             $table->timestamps();
