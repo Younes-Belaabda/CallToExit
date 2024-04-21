@@ -44,4 +44,6 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
     Route::resource('fathers', FatherController::class);
     Route::get('fathers/{father}/students' , [FatherController::class , 'students'])->name('fathers.students');
+    Route::get('fathers/{father}/create/students' , [FatherController::class , 'create_students'])->name('fathers.create.students');
+    Route::post('fathers/{father}/store/students' , [FatherController::class , 'store_students'])->name('fathers.store.students');
 });

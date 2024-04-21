@@ -87,4 +87,33 @@ class FatherController extends Controller
     public function students(User $father){
         return view('admin.fathers.students' , ['father' => $father]);
     }
+
+    public function create_students(User $father){
+        return view('admin.father-student.create-students' , ['father' => $father]);
+    }
+
+    public function store_students(Request $request , User $father){
+        $request->validate([
+            'eIDs' => 'required'
+        ]);
+
+        $eIDs = $request->input('eIDs');
+        $eIDs_status = [];
+
+        // check if some eIDs not exists
+        if(User::whereIn('eID' , $eIDs)->count() != count($eIDs)){
+            foreach($eIDs as $eID){
+                $status = false;
+                if(User::role('student')->where('eID' , $eID)->count()){
+                    $status = true;
+                }
+                $eIDs_status[] = [
+                    'eID' => $eID,
+                    'status' => $status
+                ];
+            }
+        }
+
+        return json_encode(['status' => $eIDs_status]);
+    }
 }

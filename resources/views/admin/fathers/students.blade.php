@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-12">
-        <a href="" class="btn btn-success btn-sm mb-2">إنشاء علاقة مع طالب</a>
+        <a href="{{ route('admin.fathers.create.students' , ['father' => $father]) }}" class="btn btn-success btn-sm mb-2">إنشاء علاقة مع طالب</a>
         <div class="card">
             <div class="card-body">
                 <div class="responsive-table-plugin">
