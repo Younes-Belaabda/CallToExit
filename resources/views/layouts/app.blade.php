@@ -436,20 +436,20 @@
             <!-- Brand Logo Light -->
             <a href="index.php" class="logo logo-light">
                 <span class="logo-lg">
-                    <img src="assets/images/logo.png" alt="logo">
+                    <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
                 </span>
                 <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="small logo">
+                    <img src="{{ asset('assets/images/logo-sm.png') }}" alt="small logo">
                 </span>
             </a>
 
             <!-- Brand Logo Dark -->
             <a href="index.php" class="logo logo-dark">
                 <span class="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="dark logo">
+                    <img src="{{ asset('assets/images/logo-dark.png') }}" alt="dark logo">
                 </span>
                 <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="small logo">
+                    <img src="{{ asset('assets/images/logo-sm.png') }}" alt="small logo">
                 </span>
             </a>
 
@@ -485,6 +485,30 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.students.index') }}">الطلاب</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#requests" aria-expanded="false"
+                            aria-controls="requests" class="side-nav-link">
+                            <i class="ri-pages-line"></i>
+                            <span> الطلبات </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="requests">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.requests.progress') }}">الجديدة</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.requests.approved') }}">المقبولة</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.requests.rejected') }}">المرفوضة</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.requests.all') }}">الأرشيف</a>
                                 </li>
                             </ul>
                         </div>

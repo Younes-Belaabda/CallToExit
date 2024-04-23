@@ -1,11 +1,15 @@
 <?php
 
+use App\Models\ExitRequest;
+use Illuminate\Http\Request;
+use App\Models\ExitRequestStudent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\FatherController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ExitRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +52,36 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('fathers/{father}/students' , [FatherController::class , 'students'])->name('fathers.students');
     Route::get('fathers/{father}/create/students' , [FatherController::class , 'create_students'])->name('fathers.create.students');
     Route::post('fathers/{father}/store/students' , [FatherController::class , 'store_students'])->name('fathers.store.students');
+
+    Route::get('requests', [ExitRequestController::class , 'index'])->name('requests.all');
+    Route::get('requests/approved', [ExitRequestController::class , 'approved'])->name('requests.approved');
+    Route::get('requests/progress', [ExitRequestController::class , 'progress'])->name('requests.progress');
+    Route::get('requests/rejected', [ExitRequestController::class , 'rejected'])->name('requests.rejected');
+    Route::post('requests/{request}/approve', [ExitRequestController::class , 'approve'])->name('requests.approve');
+    Route::post('requests/{request}/reject', [ExitRequestController::class , 'reject'])->name('requests.reject');
 });
+
+Route::get('request-exit' , function(){
+    return view('guest.request-exit-1');
+})->name('guest.request-exit');
+
+Route::post('request-exit-choose' , function(Request $request){
+
+    $validated = $request->validate([
+        'reason' => 'required'
+    ]);
+
+    $exit_request = ExitRequest::create([
+        'requested_by' => $request->requested_by,
+        'reason' => $request->reason
+    ]);
+
+    foreach($request->eIDs as $id){
+        ExitRequestStudent::create([
+            'exit_request_id' => $exit_request->id,
+            'user_id' => $id
+        ]);
+    }
+
+    return response()->json('تم الإنشاء');
+})->name('guest.request-exit-choose');

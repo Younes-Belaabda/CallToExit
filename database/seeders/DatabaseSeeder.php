@@ -27,22 +27,22 @@ class DatabaseSeeder extends Seeder
         }
 
         // simulate requests
-        foreach(range(0,10) as $rep){
-            $exit_request = \App\Models\ExitRequest::create(
-                [
-                    'requested_by' => \App\Models\User::role('father')->get()->random(1)->first()->id,
-                    'verified_by' => \App\Models\User::role('staff')->get()->random(1)->first()->id,
-                    'reason' => fake()->text(),
-                    'status' => Arr::random(\App\Enums\ExitRequestStatusEnum::cases())
-                ]
-            );
-            \App\Models\ExitRequestStudent::create(
-                [
-                    'exit_request_id' => $exit_request->id,
-                    'user_id' => \App\Models\User::role('student')->get()->random(1)->first()->id
-                ]
-            );
-        }
+        // foreach(range(0,10) as $rep){
+        //     $exit_request = \App\Models\ExitRequest::create(
+        //         [
+        //             'requested_by' => \App\Models\User::role('father')->get()->random(1)->first()->id,
+        //             'verified_by' => \App\Models\User::role('staff')->get()->random(1)->first()->id,
+        //             'reason' => fake()->text(),
+        //             'status' => Arr::random(\App\Enums\ExitRequestStatusEnum::cases())
+        //         ]
+        //     );
+        //     \App\Models\ExitRequestStudent::create(
+        //         [
+        //             'exit_request_id' => $exit_request->id,
+        //             'user_id' => \App\Models\User::role('student')->get()->random(1)->first()->id
+        //         ]
+        //     );
+        // }
 
 
     }
