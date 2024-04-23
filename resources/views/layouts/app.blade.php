@@ -66,19 +66,11 @@
                         </div>
                     </button>
 
-                    <!-- Topbar Search Form -->
-                    <div class="app-search d-none d-lg-block">
-                        <form>
-                            <div class="input-group">
-                                <input type="search" class="form-control" placeholder="Search...">
-                                <span class="ri-search-line search-icon text-muted"></span>
-                            </div>
-                        </form>
-                    </div>
+
                 </div>
 
                 <ul class="topbar-menu d-flex align-items-center gap-3">
-                    <li class="dropdown d-lg-none">
+                    {{-- <li class="dropdown d-lg-none">
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="ri-search-line fs-22"></i>
@@ -89,9 +81,9 @@
                                     aria-label="Recipient's username">
                             </form>
                         </div>
-                    </li>
+                    </li> --}}
 
-                    <li class="dropdown">
+                    {{-- <li class="dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="{{ asset('assets/images/flags/us.jpg') }}" alt="user-image" class="me-0 me-sm-1"
@@ -128,9 +120,9 @@
                             </a>
 
                         </div>
-                    </li>
+                    </li> --}}
 
-                    <li class="dropdown notification-list">
+                    {{-- <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="ri-mail-line fs-22"></i>
@@ -374,54 +366,30 @@
                         <div class="nav-link" id="light-dark-mode">
                             <i class="ri-moon-line fs-22"></i>
                         </div>
-                    </li>
+                    </li> --}}
 
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown"
                             href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <span class="account-user-avatar">
+                            {{-- <span class="account-user-avatar">
                                 <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32"
                                     class="rounded-circle">
-                            </span>
+                            </span> --}}
                             <span class="d-lg-block d-none">
-                                <h5 class="my-0 fw-normal">Thomson <i
+                                <h5 class="my-0 fw-normal">{{ auth()->user()->name }} <i
                                         class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                             <!-- item-->
                             <div class=" dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome !</h6>
+                                <h6 class="text-overflow m-0">مرحبا !</h6>
                             </div>
-
-                            <!-- item-->
-                            <a href="pages-profile.php" class="dropdown-item">
-                                <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
-                                <span>My Account</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="pages-profile.php" class="dropdown-item">
-                                <i class="ri-settings-4-line fs-18 align-middle me-1"></i>
-                                <span>Settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="pages-faq.php" class="dropdown-item">
-                                <i class="ri-customer-service-2-line fs-18 align-middle me-1"></i>
-                                <span>Support</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="auth-lock-screen.php" class="dropdown-item">
-                                <i class="ri-lock-password-line fs-18 align-middle me-1"></i>
-                                <span>Lock Screen</span>
-                            </a>
 
                             <!-- item-->
                             <a href="auth-logout-2.php" class="dropdown-item">
                                 <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
-                                <span>Logout</span>
+                                <span>الخروج</span>
                             </a>
                         </div>
                     </li>
@@ -534,7 +502,7 @@
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box">
+                            {{-- <div class="page-title-box">
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
@@ -544,7 +512,8 @@
                                     </ol>
                                 </div>
                                 <h4 class="page-title">-</h4>
-                            </div>
+                            </div> --}}
+                            <div class="py-3"></div>
                         </div>
                     </div>
                     <!-- end page title -->
@@ -562,9 +531,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> © Velonic - Theme by <b>Techzaa</b>
+                            لوحة التحكم &copy; 2024
                         </div>
                     </div>
                 </div>
