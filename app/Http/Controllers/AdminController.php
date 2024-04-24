@@ -12,7 +12,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = User::role('admin')->get();
+        $admins = User::role('admin')->paginate(10);
         return view('admin.admins.index' , ['admins' => $admins]);
     }
 

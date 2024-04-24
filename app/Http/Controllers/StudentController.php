@@ -13,7 +13,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = User::role('student')->get();
+        $students = User::role('student')->paginate(10);
         return view('admin.students.index' , ['students' => $students]);
     }
 

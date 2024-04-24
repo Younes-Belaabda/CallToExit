@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $admin1->assignRole('admin');
 
-        $grades = ['الأول' , 'التاني' , 'الثالث' , 'الرابع' , 'الخامس' , 'السادس' , 'السابع'];
+        $grades = ['الأول' , 'التاني' , 'الثالث' , 'الرابع' , 'الخامس' , 'السادس' , 'السابع' , 'الثامن'];
         foreach($grades as $grade){
             Grade::create([
                 'name' => $grade

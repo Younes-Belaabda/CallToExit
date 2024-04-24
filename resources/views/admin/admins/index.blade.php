@@ -28,6 +28,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $admins->links() }}
                         </div> <!-- end .table-responsive -->
 
                     </div> <!-- end .table-rep-plugin-->

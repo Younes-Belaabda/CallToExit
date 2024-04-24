@@ -12,7 +12,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staffs = User::role('staff')->get();
+        $staffs = User::role('staff')->paginate(10);
         return view('admin.staffs.index' , ['staffs' => $staffs]);
     }
 

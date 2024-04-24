@@ -13,7 +13,7 @@ class FatherController extends Controller
      */
     public function index()
     {
-        $fathers = User::role('father')->get();
+        $fathers = User::role('father')->paginate(10);
         return view('admin.fathers.index' , ['fathers' => $fathers]);
     }
 

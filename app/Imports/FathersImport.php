@@ -23,16 +23,14 @@ class fathersImport implements ToModel , WithHeadingRow , WithChunkReading
             'name' => $row[$indexs['name']],
             'email' => 'e-' . $row[$indexs['eID']] . '@mail.com',
             'password' => bcrypt(00110011),
-            'grade_id' => $row[$indexs['grade_id']]
+            // 'grade_id' => $row[$indexs['grade_id']]
         ]);
-
-        $user->assignRole('student');
-
+        $user->assignRole('father');
         return $user;
     }
 
     public function chunkSize(): int
     {
-        return 1;
+        return 100;
     }
 }

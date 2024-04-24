@@ -112,7 +112,7 @@ Route::post('import-confirmed' , function(Request $request){
     $rows = [
         'name' => $name,
         'eID' => $eID,
-        'grade_id' => $grade_id
+        // 'grade_id' => $grade_id
     ];
     Session::forget(['filename' , 'filename-heading']);
     Session::put('rows' , $rows);
