@@ -1,11 +1,15 @@
 <?php
 
+
 use App\Models\ExitRequest;
 use Illuminate\Http\Request;
 use App\Imports\FathersImport;
 use App\Imports\StudentImport;
+use App\Jobs\ImportStudentsJob;
 use App\Models\ExitRequestStudent;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use Rap2hpoutre\FastExcel\FastExcel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AdminController;
@@ -95,27 +99,31 @@ Route::post('import' , function(Request $request){
     $filename = $request->file('file')->store('files');
     $headings = (new Maatwebsite\Excel\HeadingRowImport)->toArray($filename);
     Session::put('filename' , $filename);
-    Session::put('filename-heading' , $headings);
+    Session::put('headings' , $headings);
     return redirect()->route('import-confirmed');
 });
 
 Route::get('import-confirmed' , function(Request $request){
-    $headings = Session::get('filename-heading');
+    $filename = Session::get('filename');
+    $headings = Session::get('headings');
     return view('import-confirmed' , ['headings' => $headings[0][0]]);
 })->name('import-confirmed');
 
 Route::post('import-confirmed' , function(Request $request){
     $filename = Session::get('filename');
+    $headings = Session::get('headings');
+
     $name     = $request->name;
-    $grade_id = $request->grade_id;
     $eID      = $request->eID;
+
     $rows = [
         'name' => $name,
-        'eID' => $eID,
-        // 'grade_id' => $grade_id
+        'eID' => $eID
     ];
-    Session::forget(['filename' , 'filename-heading']);
-    Session::put('rows' , $rows);
-    Excel::import(new FathersImport, $filename);
+
+    $collection = (new FastExcel)->import(storage_path('app/' . $filename));
+
+    ImportStudentsJob::dispatch($collection , Session::get('rows'));
+    
     return redirect()->route('admin.fathers.index');
 })->name('import-confirmed');

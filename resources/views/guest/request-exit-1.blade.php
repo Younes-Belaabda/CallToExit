@@ -116,7 +116,7 @@
                         if (res.phase == 'phase-3') {
                             var html = '';
                             $.each(res.students, function(index, item) {
-                                html += `<div class="badge bg-danger p-2 d-flex align-items-center gap-2">
+                                html += `<div class="badge bg-danger p-2 d-flex align-items-center gap-2 mb-2">
                                             <span>${item.name}</span>
                                             <input type="checkbox" name="eIDs[]" value="${item.id}" />
                                         </div>`;

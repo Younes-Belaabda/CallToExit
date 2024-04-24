@@ -28,8 +28,8 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $staffs->links() }}
                         </div> <!-- end .table-responsive -->
+                        {{ $staffs->links() }}
 
                     </div> <!-- end .table-rep-plugin-->
                 </div> <!-- end .responsive-table-plugin-->

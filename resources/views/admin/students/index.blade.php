@@ -34,8 +34,8 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $students->links() }}
                         </div> <!-- end .table-responsive -->
+                        {{ $students->links() }}
 
                     </div> <!-- end .table-rep-plugin-->
                 </div> <!-- end .responsive-table-plugin-->
