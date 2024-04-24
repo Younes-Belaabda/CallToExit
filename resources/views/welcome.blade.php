@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xxl-3 col-sm-6">
+        {{-- <div class="col-xxl-3 col-sm-6">
             <div class="card widget-flat text-bg-pink">
                 <div class="card-body">
                     <div class="float-end">
@@ -64,6 +64,6 @@
                     </p>
                 </div>
             </div>
-        </div> <!-- end col-->
+        </div> <!-- end col--> --}}
     </div>
 @endsection

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use App\Models\Grade;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -30,6 +31,14 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt(123456)
         ]);
         $admin1->assignRole('admin');
+
+        $grades = ['الأول' , 'التاني' , 'الثالث' , 'الرابع' , 'الخامس' , 'السادس' , 'السابع'];
+        foreach($grades as $grade){
+            Grade::create([
+                'name' => $grade
+            ]);
+        }
+
 
 
     }

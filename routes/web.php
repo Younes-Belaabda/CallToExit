@@ -2,8 +2,12 @@
 
 use App\Models\ExitRequest;
 use Illuminate\Http\Request;
+use App\Imports\FathersImport;
+use App\Imports\StudentImport;
 use App\Models\ExitRequestStudent;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\FatherController;
@@ -81,3 +85,37 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::post('requests/{request}/approve', [ExitRequestController::class , 'approve'])->name('requests.approve');
     Route::post('requests/{request}/reject', [ExitRequestController::class , 'reject'])->name('requests.reject');
 });
+
+
+Route::get('import' , function(){
+    return view('import');
+});
+
+Route::post('import' , function(Request $request){
+    $filename = $request->file('file')->store('files');
+    $headings = (new Maatwebsite\Excel\HeadingRowImport)->toArray($filename);
+    Session::put('filename' , $filename);
+    Session::put('filename-heading' , $headings);
+    return redirect()->route('import-confirmed');
+});
+
+Route::get('import-confirmed' , function(Request $request){
+    $headings = Session::get('filename-heading');
+    return view('import-confirmed' , ['headings' => $headings[0][0]]);
+})->name('import-confirmed');
+
+Route::post('import-confirmed' , function(Request $request){
+    $filename = Session::get('filename');
+    $name     = $request->name;
+    $grade_id = $request->grade_id;
+    $eID      = $request->eID;
+    $rows = [
+        'name' => $name,
+        'eID' => $eID,
+        'grade_id' => $grade_id
+    ];
+    Session::forget(['filename' , 'filename-heading']);
+    Session::put('rows' , $rows);
+    Excel::import(new FathersImport, $filename);
+    return redirect()->route('admin.fathers.index');
+})->name('import-confirmed');
