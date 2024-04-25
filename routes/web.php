@@ -37,9 +37,9 @@ Route::get('/', function () {
 
 Route::post('request-exit-choose' , function(Request $request){
 
-    $validated = $request->validate([
-        'reason' => 'required|required_if:reason_choice,'
-    ]);
+    // $validated = $request->validate([
+    //     'reason' => 'required|required_if:reason_choice,'
+    // ]);
 
     $reason = $request->reason_choice != '' ? $request->reason_choice : $request->reason;
 
