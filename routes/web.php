@@ -35,7 +35,7 @@ Route::get('/', function () {
     return view('guest.request-exit-1');
 })->name('guest.request-exit');
 
-Route::post('request-exit-choose' , function(Request $request){
+Route::get('request-exit-choose' , function(Request $request){
 
     // $validated = $request->validate([
     //     'reason' => 'required'
