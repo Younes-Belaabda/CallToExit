@@ -61,7 +61,7 @@
                                         <div class="form-group mb-2">
                                             <label for="reason" class="form-label mb-2">سبب طلب الإستئذان</label>
                                             <select class="form-control mb-2" name="reason_choice" id="">
-                                                <option name="reason_choice">اختر سبب</option>
+                                                <option name="reason_choice" value="">اختر سبب</option>
                                                 @foreach (\App\Models\Reason::all() as $reason)
                                                     <option value="{{ $reason->name }}">{{ $reason->name }}</option>
                                                 @endforeach
