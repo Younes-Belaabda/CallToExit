@@ -35,7 +35,7 @@ Route::get('/', function () {
     return view('guest.request-exit-1');
 })->name('guest.request-exit');
 
-Route::get('request-exit-choose' , function(Request $request){
+Route::post('request-exit-choose' , function(Request $request){
 
     // $validated = $request->validate([
     //     'reason' => 'required'
@@ -59,7 +59,7 @@ Route::get('request-exit-choose' , function(Request $request){
     // }
 
     // return response()->json('تم الإنشاء');
-    dd('Hi');
+    return response()->json(['status' => $request->eIDs]);
 })->name('guest.request-exit-choose');
 
 Route::middleware('auth')->group(function () {
