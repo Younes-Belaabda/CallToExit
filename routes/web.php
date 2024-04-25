@@ -41,24 +41,25 @@ Route::post('request-exit-choose' , function(Request $request){
     //     'reason' => 'required'
     // ]);
 
-    $reason = $request->reason_choice;
+    // $reason = $request->reason_choice;
 
-    if($reason == '')
-        $reason = $request->reason;
+    // if($reason == '')
+    //     $reason = $request->reason;
 
-    $exit_request = ExitRequest::create([
-        'requested_by' => $request->requested_by,
-        'reason' => $reason
-    ]);
+    // $exit_request = ExitRequest::create([
+    //     'requested_by' => $request->requested_by,
+    //     'reason' => $reason
+    // ]);
 
-    foreach($request->eIDs as $id){
-        ExitRequestStudent::create([
-            'exit_request_id' => $exit_request->id,
-            'user_id' => $id
-        ]);
-    }
+    // foreach($request->eIDs as $id){
+    //     ExitRequestStudent::create([
+    //         'exit_request_id' => $exit_request->id,
+    //         'user_id' => $id
+    //     ]);
+    // }
 
-    return response()->json('تم الإنشاء');
+    // return response()->json('تم الإنشاء');
+    return response()->json(['status' => $request->eIDs]);
 })->name('guest.request-exit-choose');
 
 Route::middleware('auth')->group(function () {
