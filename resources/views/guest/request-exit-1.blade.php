@@ -33,7 +33,7 @@
                             <div class="tab-pane show active" id="home1">
                                 <div class="phase phase-1">
                                     <form id="form-phase-1" action="{{ route('api.father.students') }}" method="post">
-                                        <input name="_token" type="hidden" value="{{ csrf_token() }}" />
+                                        @csrf
                                         <div class="form-group">
                                             <label for="father_identity" class="mb-2">المرجو إدخال رقم الهوية</label>
                                             <input id="father-identity" type="text" name="father_identity" class="form-control mb-2" required>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="phase phase-2 d-none">
                                     <form id="form-phase-2" action="{{ route('api.student') }}" method="post">
-                                        <input name="_token" type="hidden" value="{{ csrf_token() }}" />
+                                        @csrf
                                         <div class="form-group">
                                             <label for="student_identity" class="mb-2">المرجو إدخال رقم هوية الطالب</label>
                                             <input type="text" name="student_identity" class="form-control mb-2">
@@ -54,19 +54,19 @@
 
                                 <div class="phase phase-3 d-none">
                                     <form class="form-phase-3" action="{{ route('guest.request-exit-choose') }}" method="post">
-                                        <input name="_token" type="hidden" value="{{ csrf_token() }}" />
+                                        @csrf
                                         <div class="form-group students">
 
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="reason" class="form-label mb-2">سبب طلب الإستئذان</label>
-                                            <input type="text" name="requested_by" value="1028299525">
                                             <select class="form-control mb-2" name="reason_choice" id="">
                                                 <option name="reason_choice">اختر سبب</option>
                                                 @foreach (\App\Models\Reason::all() as $reason)
                                                     <option value="{{ $reason->name }}">{{ $reason->name }}</option>
                                                 @endforeach
                                             </select>
+                                            {{--  --}}
                                             <label for="reason" class="form-label mb-2">في حالة عدم وجود السبب يمكنك كتابته</label>
                                             <textarea name="reason" id="reason" cols="30" rows="10" class="form-control"></textarea>
                                         </div>
@@ -119,8 +119,6 @@
                 e.preventDefault();
                 get_students($('#form-phase-1'))
                     .then((res) => {
-                        console.log('Phase1');
-                        console.dir(res);
                         $('.phase').addClass('d-none');
                         $('.' + res.phase).removeClass('d-none');
                         if (res.phase == 'phase-3') {
@@ -142,8 +140,6 @@
                 e.preventDefault();
                 get_student($('#form-phase-2'))
                     .then((res) => {
-                        console.log('Phase2');
-                        console.dir(res);
                         $('.phase').addClass('d-none');
                         $('.' + res.phase).removeClass('d-none');
                         if (res.phase == 'phase-3') {
@@ -161,34 +157,30 @@
                     });
             });
 
-            // $('.form-phase-3').on('submit', function(e) {
-            //     e.preventDefault();
-            //     console.log('Phase3');
-            //     var data = $('.form-phase-3').serializeArray();
-            //     data.push({name:'requested_by' , value: $('#father-identity').val()});
-            //     data = $.param(data);
-            //     console.dir(data);
-            //     $.ajax({
-            //             method: $(this).attr('method'),
-            //             url: $(this).attr('action'),
-            //             data: data,
-            //         })
-            //         .done(function(res) {
-            //             $('.phase').addClass('d-none');
-            //             $('.phase-4').removeClass('d-none');
-            //             $('.tab-phase').removeClass('active');
-            //             $('.tab-phase-3').addClass('active');
-            //         })
-            //         .fail(function(jqXHR , response) {
-            //             console.dir(jqXHR);
-            //             console.dir(response);
-            //             Swal.fire({
-            //                 title: "هناك خطأ",
-            //                 text: 'المرجو إختيار الطلاب مع وضع السبب',
-            //                 icon: "warning"
-            //             });
-            //         })
-            // });
+            $('.form-phase-3').on('submit', function(e) {
+                e.preventDefault();
+                var data = $('.form-phase-3').serializeArray();
+                data.push({name:'requested_by' , value: $('#father-identity').val()});
+                data = $.param(data);
+                $.ajax({
+                        method: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: data,
+                    })
+                    .done(function(res) {
+                        $('.phase').addClass('d-none');
+                        $('.phase-4').removeClass('d-none');
+                        $('.tab-phase').removeClass('active');
+                        $('.tab-phase-3').addClass('active');
+                    })
+                    .fail(function(jqXHR , response) {
+                        Swal.fire({
+                            title: "هناك خطأ",
+                            text: 'المرجو إختيار الطلاب مع وضع السبب',
+                            icon: "warning"
+                        });
+                    })
+            });
         });
     </script>
 @endsection

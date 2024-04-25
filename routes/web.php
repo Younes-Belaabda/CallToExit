@@ -37,29 +37,25 @@ Route::get('/', function () {
 
 Route::post('request-exit-choose' , function(Request $request){
 
-    // $validated = $request->validate([
-    //     'reason' => 'required'
-    // ]);
+    $validated = $request->validate([
+        'reason' => 'required|required_if:reason_choice,'
+    ]);
 
-    // $reason = $request->reason_choice;
+    $reason = $request->reason_choice != '' ? $request->reason_choice : $request->reason;
 
-    // if($reason == '')
-    //     $reason = $request->reason;
+    $exit_request = ExitRequest::create([
+        'requested_by' => $request->requested_by,
+        'reason' => $reason
+    ]);
 
-    // $exit_request = ExitRequest::create([
-    //     'requested_by' => $request->requested_by,
-    //     'reason' => $reason
-    // ]);
+    foreach($request->eIDs as $id){
+        ExitRequestStudent::create([
+            'exit_request_id' => $exit_request->id,
+            'user_id' => $id
+        ]);
+    }
 
-    // foreach($request->eIDs as $id){
-    //     ExitRequestStudent::create([
-    //         'exit_request_id' => $exit_request->id,
-    //         'user_id' => $id
-    //     ]);
-    // }
-
-    // return response()->json('تم الإنشاء');
-    return response()->json(['status' => $request->eIDs]);
+    return response()->json('تم الإنشاء');
 })->name('guest.request-exit-choose');
 
 Route::middleware('auth')->group(function () {
