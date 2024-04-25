@@ -59,7 +59,7 @@ Route::post('request-exit-choose' , function(Request $request){
     // }
 
     // return response()->json('تم الإنشاء');
-    return response()->json(['status' => $request->eIDs]);
+    dd('Hi');
 })->name('guest.request-exit-choose');
 
 Route::middleware('auth')->group(function () {
