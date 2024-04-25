@@ -53,8 +53,8 @@
                                 </div>
 
                                 <div class="phase phase-3 d-none">
-                                    <form class="form-phase-3" action="{{ route('guest.request-exit-choose') }}" method="post">
-                                        <input name="_token" type="hidden" value="{{ csrf_token() }}" />
+                                    <form class="form-phase-3" action="{{ route('guest.request-exit-choose') }}" method="GET">
+                                        {{-- <input name="_token" type="hidden" value="{{ csrf_token() }}" /> --}}
                                         <div class="form-group students">
 
                                         </div>
