@@ -33,7 +33,7 @@
                             <div class="tab-pane show active" id="home1">
                                 <div class="phase phase-1">
                                     <form id="form-phase-1" action="{{ route('api.father.students') }}" method="post">
-                                        @csrf
+                                        <input name="_token" type="hidden" value="{{ csrf_token() }}" />
                                         <div class="form-group">
                                             <label for="father_identity" class="mb-2">المرجو إدخال رقم الهوية</label>
                                             <input id="father-identity" type="text" name="father_identity" class="form-control mb-2" required>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="phase phase-2 d-none">
                                     <form id="form-phase-2" action="{{ route('api.student') }}" method="post">
-                                        @csrf
+                                        <input name="_token" type="hidden" value="{{ csrf_token() }}" />
                                         <div class="form-group">
                                             <label for="student_identity" class="mb-2">المرجو إدخال رقم هوية الطالب</label>
                                             <input type="text" name="student_identity" class="form-control mb-2">
@@ -54,7 +54,7 @@
 
                                 <div class="phase phase-3 d-none">
                                     <form class="form-phase-3" action="{{ route('guest.request-exit-choose') }}" method="post">
-                                        @csrf
+                                        <input name="_token" type="hidden" value="{{ csrf_token() }}" />
                                         <div class="form-group students">
 
                                         </div>
