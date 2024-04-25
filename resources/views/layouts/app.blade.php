@@ -481,6 +481,21 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#extensions" aria-expanded="false"
+                            aria-controls="extensions" class="side-nav-link">
+                            <i class="ri-pages-line"></i>
+                            <span> الإضافات </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="extensions">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.reasons.index') }}">الأسباب</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
                 <!--- End Sidemenu -->
 

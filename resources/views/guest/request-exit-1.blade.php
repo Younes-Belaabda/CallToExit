@@ -60,6 +60,13 @@
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="reason" class="form-label mb-2">سبب طلب الإستئذان</label>
+                                            <select class="form-control mb-2" name="reason_choice" id="">
+                                                <option name="reason_choice">اختر سبب</option>
+                                                @foreach (\App\Models\Reason::all() as $reason)
+                                                    <option value="{{ $reason->name }}">{{ $reason->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <label for="reason" class="form-label mb-2">في حالة عدم وجود السبب يمكنك كتابته</label>
                                             <textarea name="reason" id="reason" cols="30" rows="10" class="form-control"></textarea>
                                         </div>
                                         <button class="btn btn-success">التالي</button>
@@ -168,6 +175,8 @@
                         $('.tab-phase-3').addClass('active');
                     })
                     .fail(function(jqXHR , response) {
+                        console.dir(jqXHR);
+                        console.dir(response);
                         Swal.fire({
                             title: "هناك خطأ",
                             text: 'المرجو إختيار الطلاب مع وضع السبب',

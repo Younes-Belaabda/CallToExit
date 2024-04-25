@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\FatherController;
+use App\Http\Controllers\ReasonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ExitRequestController;
@@ -36,13 +37,18 @@ Route::get('/', function () {
 
 Route::post('request-exit-choose' , function(Request $request){
 
-    $validated = $request->validate([
-        'reason' => 'required'
-    ]);
+    // $validated = $request->validate([
+    //     'reason' => 'required'
+    // ]);
+
+    $reason = $request->reason_choice;
+
+    if($reason == '')
+        $reason = $request->reason;
 
     $exit_request = ExitRequest::create([
         'requested_by' => $request->requested_by,
-        'reason' => $request->reason
+        'reason' => $reason
     ]);
 
     foreach($request->eIDs as $id){
@@ -78,6 +84,9 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('staffs', StaffController::class);
 
     Route::resource('fathers', FatherController::class);
+
+    Route::resource('reasons', ReasonController::class);
+
     Route::get('fathers/{father}/students' , [FatherController::class , 'students'])->name('fathers.students');
     Route::get('fathers/{father}/create/students' , [FatherController::class , 'create_students'])->name('fathers.create.students');
     Route::post('fathers/{father}/store/students' , [FatherController::class , 'store_students'])->name('fathers.store.students');
@@ -124,6 +133,6 @@ Route::post('import-confirmed' , function(Request $request){
     $collection = (new FastExcel)->import(storage_path('app/' . $filename));
 
     ImportStudentsJob::dispatch($collection , Session::get('rows'));
-    
+
     return redirect()->route('admin.fathers.index');
 })->name('import-confirmed');
