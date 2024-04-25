@@ -60,6 +60,7 @@
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="reason" class="form-label mb-2">سبب طلب الإستئذان</label>
+                                            <input type="text" name="requested_by" value="1028299525">
                                             <select class="form-control mb-2" name="reason_choice" id="">
                                                 <option name="reason_choice">اختر سبب</option>
                                                 @foreach (\App\Models\Reason::all() as $reason)
@@ -160,34 +161,34 @@
                     });
             });
 
-            $('.form-phase-3').on('submit', function(e) {
-                e.preventDefault();
-                console.log('Phase3');
-                var data = $('.form-phase-3').serializeArray();
-                data.push({name:'requested_by' , value: $('#father-identity').val()});
-                data = $.param(data);
-                console.dir(data);
-                $.ajax({
-                        method: $(this).attr('method'),
-                        url: $(this).attr('action'),
-                        data: data,
-                    })
-                    .done(function(res) {
-                        $('.phase').addClass('d-none');
-                        $('.phase-4').removeClass('d-none');
-                        $('.tab-phase').removeClass('active');
-                        $('.tab-phase-3').addClass('active');
-                    })
-                    .fail(function(jqXHR , response) {
-                        console.dir(jqXHR);
-                        console.dir(response);
-                        Swal.fire({
-                            title: "هناك خطأ",
-                            text: 'المرجو إختيار الطلاب مع وضع السبب',
-                            icon: "warning"
-                        });
-                    })
-            });
+            // $('.form-phase-3').on('submit', function(e) {
+            //     e.preventDefault();
+            //     console.log('Phase3');
+            //     var data = $('.form-phase-3').serializeArray();
+            //     data.push({name:'requested_by' , value: $('#father-identity').val()});
+            //     data = $.param(data);
+            //     console.dir(data);
+            //     $.ajax({
+            //             method: $(this).attr('method'),
+            //             url: $(this).attr('action'),
+            //             data: data,
+            //         })
+            //         .done(function(res) {
+            //             $('.phase').addClass('d-none');
+            //             $('.phase-4').removeClass('d-none');
+            //             $('.tab-phase').removeClass('active');
+            //             $('.tab-phase-3').addClass('active');
+            //         })
+            //         .fail(function(jqXHR , response) {
+            //             console.dir(jqXHR);
+            //             console.dir(response);
+            //             Swal.fire({
+            //                 title: "هناك خطأ",
+            //                 text: 'المرجو إختيار الطلاب مع وضع السبب',
+            //                 icon: "warning"
+            //             });
+            //         })
+            // });
         });
     </script>
 @endsection
