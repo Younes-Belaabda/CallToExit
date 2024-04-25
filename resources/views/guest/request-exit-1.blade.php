@@ -118,6 +118,8 @@
                 e.preventDefault();
                 get_students($('#form-phase-1'))
                     .then((res) => {
+                        console.log('Phase1');
+                        console.dir(res);
                         $('.phase').addClass('d-none');
                         $('.' + res.phase).removeClass('d-none');
                         if (res.phase == 'phase-3') {
@@ -139,6 +141,8 @@
                 e.preventDefault();
                 get_student($('#form-phase-2'))
                     .then((res) => {
+                        console.log('Phase2');
+                        console.dir(res);
                         $('.phase').addClass('d-none');
                         $('.' + res.phase).removeClass('d-none');
                         if (res.phase == 'phase-3') {
@@ -158,7 +162,7 @@
 
             $('.form-phase-3').on('submit', function(e) {
                 e.preventDefault();
-
+                console.log('Phase3');
                 var data = $('.form-phase-3').serializeArray();
                 data.push({name:'requested_by' , value: $('#father-identity').val()});
                 data = $.param(data);
